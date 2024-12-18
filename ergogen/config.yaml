@@ -1,0 +1,33 @@
+meta:
+  name: tsuki
+  author: 42willow
+units:
+  # 1u keycap is 16mm×16mm
+  # CFX spacing (17mm×17mm)
+
+  # PG1316S
+  sx: 16 # width
+  sy: 16 # height
+  ss: 1 # spacing
+
+  # PG1316M
+  mx: 16 # width
+  my: 10.3 # height
+  ms: 1 # spacing
+
+points:
+  zones:
+    matrix:
+      columns:
+        pinky:
+        ring:
+        middle:
+        index:
+        inner:
+      rows:
+        bottom:
+        home:
+        top:
+  mirror:
+    ref: matrix_inner_home
+    distance: 50
