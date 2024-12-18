@@ -1,33 +1,76 @@
 meta:
   name: tsuki
   author: 42willow
+
 units:
-  # 1u keycap is 16mm×16mm
+  # 1u keycap (16mm×16mm)
   # CFX spacing (17mm×17mm)
 
   # PG1316S
-  sx: 16 # width
-  sy: 16 # height
-  ss: 1 # spacing
+  sx: 16 + 1 # CFX X spacing
+  sy: 16 + 1 # CFX Y spacing
 
   # PG1316M
-  mx: 16 # width
-  my: 10.3 # height
-  ms: 1 # spacing
+  mx: 16 + 1 # width
+  my: 10.3 + 1 # height
 
+  # Stagger
+  ring_stagger: 8
+  middle_stagger: 5.5
+  index_stagger: -3.375
+  inner_stagger: -2.375
+
+  # Splay
+  ring_splay: 7     # Between pinky and ring
+  middle_splay: 4   # Between ring and middle
+  pinky_splay: ring_splay + middle_splay
+
+  # Thumb cluster
+  thumb_shift_x: 0
+  thumb_shift_y: -sy
+  thumb_splay: 7
 points:
-  zones:
-    matrix:
-      columns:
-        pinky:
-        ring:
-        middle:
-        index:
-        inner:
-      rows:
-        bottom:
-        home:
-        top:
-  mirror:
-    ref: matrix_inner_home
-    distance: 50
+  rotate: ring_splay + middle_splay
+
+  zones.matrix:
+    columns:
+      pinky:
+      ring:
+        key:
+          stagger: ring_stagger
+          splay: -ring_splay
+      middle:
+        key:
+          stagger: middle_stagger
+          splay: -middle_splay
+      index:
+        key:
+          stagger: index_stagger
+      inner:
+        key:
+          stagger: inner_stagger
+    rows:
+      bottom:
+      home:
+      top:
+
+  zones.thumbs:
+    anchor:
+      ref: matrix_inner_bottom
+      shift: [thumb_shift_x, thumb_shift_y - 5]
+    columns:
+      near:
+        key:
+          splay: -thumb_splay
+          origin: [-sx/2, sx/2]
+      home:
+        key:
+          splay: -thumb_splay
+          origin: [-sx/2, sx/2]
+      far:
+        key:
+          splay: -thumb_splay
+          origin: [-sx/2, sx/2]
+  # mirror:
+  #   ref: matrix_inner_home
+  #   distance: 50
