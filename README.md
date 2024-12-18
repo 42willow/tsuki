@@ -13,7 +13,8 @@
 |Switches: PG1316S|36|[kailh](https://www.kailhswitch.com/uploads/15927/files/CPG1316S01D02-data-sheet.pdf?rnd=323)|[modulo industries](https://modulo.industries/product/pg1316s-switch/)|
 |Switches: PG1316M|10||[modulo industries](https://modulo.industries/product/pg1316m-switch/)|
 |Keycaps: PG1316S (1u)|36||[modulo industries](https://modulo.industries/product/pg1316s-keycap/)|
-|Keycaps: PG1316M (0.7u)|10||[modulo industries](https://modulo.industries/product/pg1316m-keycap/)|
+|Keycaps: PG1316M (F line)|10||[modulo industries](https://modulo.industries/product/pg1316m-keycap/)|
+|Keycaps: PG1316M (0.7u)|2||[modulo industries](https://modulo.industries/product/pg1316m-keycap/)|
 |Trackpad: TM035035|1|[cirque](https://www.cirque.com/glidepoint-circle-trackpads)|[mouser electronics](https://au.mouser.com/ProductDetail/Cirque/TM035035-2024-003)|
 
 ### Case
