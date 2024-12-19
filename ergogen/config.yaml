@@ -2,7 +2,7 @@ meta:
   name: tsuki
   author: 42willow
 
-units:
+units: # TODO: Check this
   # 1u keycap (16mm×16mm)
   # CFX spacing (17mm×17mm)
 
@@ -21,18 +21,29 @@ units:
   inner_stagger: -2.375
 
   # Splay
-  ring_splay: 7     # Between pinky and ring
-  middle_splay: 4   # Between ring and middle
+  ring_splay: 7 # Between pinky and ring
+  middle_splay: 4 # Between ring and middle
   pinky_splay: ring_splay + middle_splay
 
   # Thumb cluster
   thumb_shift_x: 0
   thumb_shift_y: -sy
   thumb_splay: 7
+
+  # MCU
+  xiao_x: 21
+  xiao_y: 17.8
+
+  mirror_distance: 25
+
 points:
-  rotate: ring_splay + middle_splay
+  rotate: 0
 
   zones.matrix:
+    mirror:
+      ref: matrix_inner_top
+      shift: [0.5sx, 0.5sy] # TODO: Check this
+      distance: mirror_distance
     columns:
       pinky:
       ring:
@@ -55,8 +66,12 @@ points:
       top:
 
   zones.thumbs:
+    mirror:
+      ref: matrix_inner_top # TODO: Check this
+      shift: [0.5sx, 0.5sy] # TODO: Check this
+      distance: mirror_distance
     anchor:
-      ref: matrix_inner_bottom
+      ref: matrix_index_bottom
       shift: [thumb_shift_x, thumb_shift_y - 5]
     columns:
       near:
@@ -71,6 +86,14 @@ points:
         key:
           splay: -thumb_splay
           origin: [-sx/2, sx/2]
-  # mirror:
-  #   ref: matrix_inner_home
-  #   distance: 50
+
+  zones.mcu:
+    anchor:
+      aggregate.parts: [matrix_inner_top, mirror_matrix_inner_top]
+      shift: [0, -0.3xiao_y]
+    key:
+      name: mcu
+      width: xiao_x
+      height: xiao_y
+
+  # zones.fn_row:
