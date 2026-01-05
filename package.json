@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "gen": "ergogen ergogen/ --debug --output dist/",
+    "fmt": "prettier --write ."
+  },
+  "dependencies": {
+    "ergogen": "^4.1.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.7.4"
+  }
+}
