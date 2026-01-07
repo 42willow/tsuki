@@ -31,8 +31,16 @@ points:
           key.splay: -15
           key.origin: [-0.5U, -0.5U]
           key.name: thumb_reachy
+
+outlines:
+  keycaps:
+    - what: rectangle
+      where: [key]
+      size: 18
+      # fillet: 3
+
 pcbs:
-  simple_split:
+  tsuki:
     template: kicad8
     footprints:
       keys:
@@ -54,14 +62,16 @@ pcbs:
           hotswap_3dmodel_filename: "${TSUKI_3DMODELS_DIR}/choc_hotswap.step"
           hotswap_3dmodel_xyz_rotation: [180, 0, 0]
           hotswap_3dmodel_xyz_offset: [0, 0, -1.6]
+
       mcu:
-        what: ceoloide/mcu_nice_nano
+        what: ceoloide/mcu_supermini_nrf52840
         where:
           - ref: matrix_inner_home
             shift: [1U, 0.5U]
         params:
           reversible: true
           only_required_jumpers: true
+          # mcu_3dmodel_filename: "${TSUKI_3DMODELS_DIR}/nrf52840.step"
           P7: matrix_pinky_top
           P7_label: P7
           P18: matrix_ring_top
