@@ -56,10 +56,10 @@ pcbs:
           include_keycap: true
           choc_v1_support: false
           choc_v2_support: true
-          switch_3dmodel_filename: "${TSUKI_3DMODELS_DIR}/choc_v2.step"
+          switch_3dmodel_filename: "${TSUKI_DIR}/assets/choc_v2.step"
           switch_3dmodel_xyz_rotation: [90, 0, 90]
           switch_3dmodel_xyz_offset: [0, 0, -4.2]
-          hotswap_3dmodel_filename: "${TSUKI_3DMODELS_DIR}/choc_hotswap.step"
+          hotswap_3dmodel_filename: "${TSUKI_DIR}/assets/choc_hotswap.step"
           hotswap_3dmodel_xyz_rotation: [180, 0, 0]
           hotswap_3dmodel_xyz_offset: [0, 0, -1.6]
 
@@ -71,7 +71,7 @@ pcbs:
         params:
           reversible: true
           only_required_jumpers: true
-          # mcu_3dmodel_filename: "${TSUKI_3DMODELS_DIR}/nrf52840.step"
+          # mcu_3dmodel_filename: "${TSUKI_DIR}/assets/nrf52840.step"
           P7: matrix_pinky_top
           P7_label: P7
           P18: matrix_ring_top
