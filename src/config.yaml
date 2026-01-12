@@ -35,9 +35,28 @@ points:
 outlines:
   keycaps:
     - what: rectangle
-      where: [key]
+      where: true
       size: 18
-      # fillet: 3
+
+  board:
+    - what: hull
+      concavity: 60
+      fillet: 3
+      expand: 2
+      points:
+        - ref: matrix_pinky_top
+        - ref: matrix_ring_top
+        - ref: matrix_middle_top
+        - ref: matrix_inner_top
+        - ref: matrix_inner_bottom
+        - ref: thumb_reachy
+        - ref: thumb_tucky
+        - ref: matrix_pinky_bottom
+
+  plate:
+    - name: board
+    - operation: subtract
+      name: keycaps
 
 pcbs:
   tsuki:
