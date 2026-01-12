@@ -4,10 +4,16 @@ include <lib/BOSL2/std.scad>
 // https://github.com/keyboardio/keyswitch_documentation/blob/master/datasheets/Kailh/CPG1353S01D01-01.pdf
 // https://shop.beekeeb.com/products/thcs-blank-black-keycaps
 
-union() {
-  key();
-  translate([0, 0, kt])
-    stem();
+keycap();
+
+module keycap() {
+  translate([kx / 2, ky / 2, kz])
+    rotate([180, 0, 0])
+      union() {
+        base();
+        translate([0, 0, kt])
+          stem();
+      }
 }
 
 // stem
@@ -40,7 +46,7 @@ kz = 3; // height
 kr = 1.5; // radius
 kt = 0.6; // thickness
 
-module key()
+module base()
   difference() {
     offset_sweep(rect([kx, ky], rounding=kr), h=kz, bot=os_circle(r=kt));
     translate([0, 0, kt]) linear_extrude(kz) offset(-kt) rect([kx, ky], rounding=kr);

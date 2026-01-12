@@ -1,6 +1,13 @@
-$fn = 300;
+$fn = 30;
 
-points = [[50, -100, 0], [50, -80.95, 0], [50, -61.900000000000006, 0], [69, -87.42699999999999, 0], [69, -68.377, 0], [69, -49.327, 0], [88, -82.6645, 0], [88, -63.61450000000001, 0], [88, -44.56450000000001, 0], [107, -87.42699999999999, 0], [107, -68.377, 0], [107, -49.327, 0], [126, -90.2845, 0], [126, -71.2345, 0], [126, -52.1845, 0], [119.57300000000001, -111.23949999999999, -10], [139.95731560000002, -117.66664999999999, -25]];
+include <lib/BOSL2/std.scad>;
+include <../dist/points.scad>;
+use <./keycaps.scad>;
+
+cx = 18;
+cy = 17;
+kx = cx - .5;
+ky = cy - .5;
 
 for (point = points) {
   echo(point);
@@ -8,7 +15,8 @@ for (point = points) {
     rotate([0, 0, point[2]])
     // difference()
     {
-      linear_extrude(4) square(size=16, center=false);
-      color("grey") linear_extrude(2) import("library/choc_hotswap.dxf");
+      translate([0, 0, 10]) keycap();
+      // linear_extrude(4) square(size=[kx, ky], center=false);
+      // color("grey") linear_extrude(2) import("library/choc_hotswap.dxf");
     }
 }

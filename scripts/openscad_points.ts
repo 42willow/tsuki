@@ -21,3 +21,6 @@ for (const pos of Object.values(input as Record<string, Key>)) {
 }
 
 console.log(JSON.stringify(points));
+
+const outputPath = path.join(__dirname, "..", "dist", "points.scad");
+Bun.write(outputPath, `points = ${JSON.stringify(points)};`);

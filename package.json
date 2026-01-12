@@ -1,7 +1,9 @@
 {
   "scripts": {
-    "gen": "ergogen src/ --debug --output dist/",
-    "fmt": "prettier --write ."
+    "gen": "bun ergogen && bun points",
+    "ergogen": "ergogen src/ --debug --output dist/",
+    "fmt": "prettier --write .",
+    "points": "bun run ./scripts/openscad_points.ts"
   },
   "dependencies": {
     "ergogen": "^4.1.0",
