@@ -48,18 +48,30 @@ outlines:
 
   board:
     - what: hull
-      concavity: 50
+      concavity: 22
       fillet: 3
       expand: 2
       points:
         - ref: matrix_pinky_top
         - ref: matrix_ring_top
         - ref: matrix_middle_top
+        - ref: matrix_index_top
         - ref: matrix_inner_top
+
         - ref: matrix_inner_bottom
+        - ref: matrix_index_bottom
+        - ref: matrix_middle_bottom
+        - ref: matrix_ring_bottom
+        - ref: matrix_pinky_bottom
+
         - ref: thumb_reachy
         - ref: thumb_tucky
         - ref: matrix_pinky_bottom
+
+        - ref: matrix_inner_home
+          shift: [1cx, -.1cy]
+        - ref: matrix_inner_home
+          shift: [1cx, -1cy]
 
   plate:
     - name: board
@@ -69,6 +81,9 @@ outlines:
 pcbs:
   tsuki:
     template: kicad8
+    outlines:
+      main:
+        outline: board
     footprints:
       keys:
         # what: ceoloide/switch_mx
@@ -94,7 +109,7 @@ pcbs:
         what: ceoloide/mcu_supermini_nrf52840
         where:
           - ref: matrix_inner_home
-            shift: [1U, 0.5U]
+            shift: [1.05cx, -0.5U]
         params:
           reversible: true
           only_required_jumpers: true
