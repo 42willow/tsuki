@@ -1,3 +1,6 @@
 [submodule "src/footprints/ceoloide"]
 	path = src/footprints/ceoloide
 	url = git@github.com:ceoloide/ergogen-footprints.git
+[submodule "src/lib/BOSL2"]
+	path = src/lib/BOSL2
+	url = https://github.com/BelfrySCAD/BOSL2
