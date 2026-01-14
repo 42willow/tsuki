@@ -11,13 +11,29 @@ module keycap() {
     rotate([180, 0, 0])
       union() {
         base();
+
         translate([0, 0, kt])
           stem();
+
+        // translate([0, 0, kt])
+        //   linear_extrude(h=1) supports();
       }
 }
 
+// crossbeam supports
+module supports() {
+  stroke = 2.5;
+  difference() {
+    union() {
+      rect([stroke, ky]); // horizontal bar
+      rect([kx, stroke]); // vertical bar
+    }
+    circle(d=sd - st);
+  }
+}
+
 // stem
-st = 0.05; // tolerance
+st = 0.1; // tolerance
 ss = 1.3 + st; // stroke
 sw = 4 + st; // width
 sd = 5.5 - st; // diameter
@@ -42,7 +58,7 @@ module stem() {
 // key
 kx = 17.5; // length
 ky = 16.5; // width
-kz = 3; // height
+kz = 3.7; // height
 kr = 1.5; // radius
 kt = 0.6; // thickness
 
