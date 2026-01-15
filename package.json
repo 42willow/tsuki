@@ -1,9 +1,10 @@
 {
   "scripts": {
-    "gen": "bun ergogen && bun points",
+    "gen": "bun ergogen && bun pcb && bun points",
     "ergogen": "ergogen src/ --debug --output dist/",
-    "fmt": "prettier --write .",
-    "points": "bun run ./scripts/openscad_points.ts"
+    "pcb": "kicad-cli pcb export svg dist/pcbs/tsuki.kicad_pcb --layers 'F.Adhesive' --exclude-drawing-sheet --output dist/pcbs/cutouts.svg",
+    "points": "bun run ./scripts/openscad_points.ts",
+    "fmt": "prettier --write ."
   },
   "dependencies": {
     "ergogen": "^4.1.0",
