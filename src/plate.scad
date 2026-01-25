@@ -12,13 +12,18 @@ ky = cy - .5;
 height = 5.5 - 2.20;
 
 render() {
-  intersection() {
-    outlines();
-    mounts();
-  }
   difference() {
-    outlines();
-    cutouts();
+    union() {
+      intersection() {
+        outlines();
+        mounts();
+      }
+      difference() {
+        outlines();
+        cutouts();
+      }
+    }
+    screw_holes();
   }
 }
 
@@ -68,4 +73,25 @@ module outlines() {
       translate([cx / 2, 0, 0]) import("./outline.svg", layer="main");
       mirror([1, 0]) translate([cx / 2, 0, 0]) import("./outline.svg", layer="main");
     }
+}
+
+module screw_holes() {
+  screws = [
+    [cx / 2 + 3, 3],
+    [cx / 2 + 3, 50],
+    [113, 8],
+    [113, 50],
+  ];
+
+  for (pos = screws) {
+    translate(pos) screw();
+    translate([-pos[0], pos[1]]) screw();
+  }
+
+  module screw() {
+    union() {
+      linear_extrude(height - 3 + 1.7) rotate([0, 0, 30]) hexagon(r=2);
+      cylinder(h=height, d=2);
+    }
+  }
 }
