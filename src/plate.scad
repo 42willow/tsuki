@@ -13,7 +13,6 @@ rev = [1, 2, 3, 18, 19, 20];
 
 for (i = [0:len(points) - 1]) {
   point = points[i];
-
   render() translate([point[0], point[1], -3]) if (i + 1 >= 18) {
       // right side
       if (len(search(i + 1, rev)) > 0) {
