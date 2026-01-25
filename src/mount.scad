@@ -5,14 +5,17 @@ $fn = 100;
 // https://github.com/keyboardio/keyswitch_documentation/blob/master/datasheets/Kailh/CPG1353S01D01-01.pdf
 // https://github.com/keyboardio/keyswitch_documentation/blob/master/datasheets/Kailh/CPG135001S30-Choc-Socket.pdf
 
+height = 5.5 - 2.20;
+
 tolerances = [
   .26, // hotswap
   .18, // central hole
   .03, // pin holes
 ];
 
-rotate([0, 180, 0])
-  render() mount();
+translate([0, 0, height])
+  rotate([0, 180, 0])
+    render() mount();
 
  module mount() {
   rotate([0, 0, 180])
@@ -27,7 +30,7 @@ rotate([0, 180, 0])
 
 module outer() {
   // choc 18mm x 17mm sleeve
-  linear_extrude(5.5 - 2.20) difference() {
+  linear_extrude(height) difference() {
       square([18, 17], center=true);
       square(15, center=true);
     }
@@ -42,14 +45,12 @@ module hotswap() {
 }
 
 module inner() {
-  height = 5.5;
-
   difference() {
-    linear_extrude(height - 2.20) square(15, center=true);
+    linear_extrude(height) square(15, center=true);
 
     union() {
       // holes
-      linear_extrude(height - 2.20) {
+      linear_extrude(height) {
         circle(d=4.80 + tolerances[1]);
 
         translate([0, 5.90]) circle(d=3 + tolerances[2]);
