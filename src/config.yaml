@@ -14,13 +14,13 @@ points:
       key:
         spread: 1cx
         padding: 1cy
-      anchor.shift: [-100, 30]
+      anchor.shift: [cx, cy/2]
       columns:
         pinky:
-        ring.key.stagger: 0.67cy
-        middle.key.stagger: 0.28cy
-        index.key.stagger: -0.28cy
-        inner.key.stagger: -0.17cy
+        ring.key.stagger: 0.70cy
+        middle.key.stagger: 0.41cy
+        index.key.stagger: -0.32cy
+        inner.key.stagger: -0.15cy
       rows:
         bottom.padding: cy
         home.padding: cy
@@ -28,13 +28,16 @@ points:
     thumb:
       anchor:
         ref: matrix_index_bottom
-        shift: [0.66U, -1.25U]
-        rotate: -10
+        shift: [0.55cx, -1.18cy]
+        rotate: -15
       columns:
         tucky:
           key.name: thumb_tucky
         reachy:
-          key.spread: U
+          key.spread: cx
           key.splay: -15
           key.origin: [-.5U, -0.5U]
           key.name: thumb_reachy
+  mirror:
+    ref: matrix_pinky_bottom
+    distance: -2cx
