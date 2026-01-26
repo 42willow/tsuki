@@ -78,14 +78,14 @@ module outlines() {
 module screw_holes() {
   screws = [
     [cx / 2 + 3, 3],
-    [cx / 2 + 3, 50],
-    [113, 8],
-    [113, 50],
+    [cx / 2 + 3, 51.3],
+    [114, 8],
+    [114, 50.7],
   ];
 
   for (pos = screws) {
     translate(pos) screw();
-    translate([-pos[0], pos[1]]) screw();
+    mirror([1, 0]) translate(pos) screw();
   }
 
   module screw() {
