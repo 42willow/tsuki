@@ -24,6 +24,9 @@ render() {
       }
     }
     screw_holes();
+
+    column_wires();
+    xflip() column_wires();
   }
 }
 
@@ -59,7 +62,6 @@ module cutouts() {
   color("orange")
     linear_extrude(height) {
       for (point = points) {
-        echo(point);
         translate([point[0], point[1], 0])
           rotate([0, 0, point[2]])
             square([cx, cy], center=true);
@@ -95,3 +97,82 @@ module screw_holes() {
     }
   }
 }
+
+module column_wires() {
+  far_x = 9 + diam / 2;
+  close_y = 3.8 - .08;
+  close_x = 4.3 + diam / 2;
+  far_y = 5.9;
+
+  column_wire(
+    [
+      points[14],
+      points[12],
+      points[16],
+    ],
+    [-far_x, -close_y]
+  );
+
+  column_wire(
+    [
+      points[11],
+      points[9],
+      points[15],
+    ]
+  );
+
+  column_wire(
+    [
+      points[8],
+      points[6],
+    ]
+  );
+
+  column_wire(
+    [
+      points[5],
+      points[3],
+    ],
+    [close_x, -far_y]
+  );
+
+  column_wire(
+    [
+      points[2],
+      points[0],
+    ],
+    [-close_x, far_y]
+  );
+}
+
+module column_wire(
+  column,
+  offset = [-(9 + 1.2 / 2), -3.75]
+) {
+  points = [
+    for (key = column) each [
+      solder_point(key, offset),
+      solder_point(key, offset, bottom=true),
+    ],
+  ];
+  wire = circle(d=diam);
+
+  path_sweep2d(wire, points);
+}
+
+diam = 1.2;
+v_offset = 1.68 - diam / 2;
+function solder_point(key, offset, bottom = false) =
+  zrot(
+    a=key[2],
+    cp=[key[0], key[1]],
+    p=back(
+      y=bottom ? -v_offset : v_offset, p=move(
+        v=offset,
+        p=[key[0], key[1]]
+      )
+    )
+  );
+
+function x(n) = points[n - 1][0];
+function y(n) = points[n - 1][1];
