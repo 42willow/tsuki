@@ -10,17 +10,18 @@ kx = cx - .5;
 ky = cy - .5;
 
 height = 5.5 - 2.20;
+diam = 1.2; // wire diameter
 
 render() {
   difference() {
     union() {
-      intersection() {
-        outlines();
-        mounts();
-      }
       difference() {
         outlines();
         cutouts();
+      }
+      intersection() {
+        outlines();
+        mounts();
       }
     }
     screw_holes();
@@ -118,14 +119,16 @@ module column_wires() {
       points[11],
       points[9],
       points[15],
-    ]
+    ],
+    [-far_x, -close_y]
   );
 
   column_wire(
     [
       points[8],
       points[6],
-    ]
+    ],
+    [-far_x, -close_y]
   );
 
   column_wire(
@@ -147,7 +150,7 @@ module column_wires() {
 
 module column_wire(
   column,
-  offset = [-(9 + 1.2 / 2), -3.75]
+  offset
 ) {
   points = [
     for (key = column) each [
@@ -155,12 +158,11 @@ module column_wire(
       solder_point(key, offset, bottom=true),
     ],
   ];
-  wire = circle(d=diam);
+  wire = square([diam, diam], center=true);
 
   path_sweep2d(wire, points);
 }
 
-diam = 1.2;
 v_offset = 1.68 - diam / 2;
 function solder_point(key, offset, bottom = false) =
   zrot(
