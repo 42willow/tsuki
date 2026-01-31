@@ -11,20 +11,27 @@ ky = cy - .5;
 
 height = 5.5 - 2.20;
 diam = 1.2; // wire diameter
+gasket = [30, 3, 3];
 
-render() {
+screws = [
+  [1.6 * cx, 2],
+  [cx, 56],
+  [114, 8],
+  [114, 50.7],
+];
+
+render() plate();
+
+module plate() {
   difference() {
     union() {
       difference() {
-        outlines();
+        linear_extrude(height) offset(gasket[1] + .5) outlines();
         cutouts();
       }
-      intersection() {
-        outlines();
-        mounts();
-      }
+      mounts();
     }
-    screw_holes();
+    screws() screw_bottom();
 
     column_wires();
     xflip() column_wires();
@@ -59,43 +66,34 @@ module mounts() {
   }
 }
 
-module cutouts() {
-  color("orange")
-    linear_extrude(height) {
-      for (point = points) {
-        translate([point[0], point[1], 0])
-          rotate([0, 0, point[2]])
-            square([cx, cy], center=true);
-      }
+module cutouts(size = [cx, cy]) {
+  linear_extrude(height) {
+    for (point = points) {
+      translate([point[0], point[1], 0])
+        rotate([0, 0, point[2]])
+          square(size, center=true);
     }
+  }
 }
 
 module outlines() {
-  color("brown")
-    linear_extrude(height) {
-      translate([cx / 2, 0, 0]) import("./outline.svg", layer="main");
-      mirror([1, 0]) translate([cx / 2, 0, 0]) import("./outline.svg", layer="main");
-    }
+  translate([cx / 2, 0, 0]) svg();
+  mirror([1, 0]) translate([cx / 2, 0, 0]) svg();
+
+  module svg() offset(1) import("./outline.svg", layer="main");
 }
 
-module screw_holes() {
-  screws = [
-    [cx / 2 + 3, 3],
-    [cx / 2 + 3, 51.3],
-    [114, 8],
-    [114, 50.7],
-  ];
-
+module screws() {
   for (pos = screws) {
-    translate(pos) screw();
-    mirror([1, 0]) translate(pos) screw();
+    translate(pos) children();
+    mirror([1, 0]) translate(pos) children();
   }
+}
 
-  module screw() {
-    union() {
-      linear_extrude(height - 3 + 1.7) rotate([0, 0, 30]) hexagon(r=2);
-      cylinder(h=height, d=2);
-    }
+module screw_bottom() {
+  union() {
+    linear_extrude(height - 3 + 1.7) rotate([0, 0, 30]) hexagon(r=2);
+    cylinder(h=height, d=2);
   }
 }
 
