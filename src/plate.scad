@@ -31,6 +31,12 @@ module plate() {
       }
       mounts();
     }
+
+    difference() {
+      up(1) linear_extrude(height - 1) offset(5) outlines();
+      linear_extrude(height) outlines();
+    }
+
     screws() screw_bottom();
 
     column_wires();
@@ -77,8 +83,8 @@ module cutouts(size = [cx, cy]) {
 }
 
 module outlines() {
-  translate([cx / 2, 0, 0]) svg();
-  mirror([1, 0]) translate([cx / 2, 0, 0]) svg();
+  translate([cx / 2, 0]) svg();
+  mirror([1, 0]) translate([cx / 2, 0]) svg();
 
   module svg() offset(1) import("./outline.svg", layer="main");
 }
