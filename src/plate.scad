@@ -73,11 +73,11 @@ module mounts() {
   }
 }
 
-function cutouts(size = [cx, cy]) =
+function cutouts(size = [cx, cy], rounding = 0) =
   [
     for (point = points) move(
       [point[0], point[1]],
-      p=zrot(point[2], p=square(size, center=true))
+      p=zrot(point[2], p=rect(size, rounding))
     ),
   ];
 

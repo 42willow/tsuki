@@ -12,7 +12,7 @@ module cover() {
   color("brown") up(5.5 - 2.2) difference() {
         linear_extrude(3) difference() {
             region(outlines);
-            region(cutouts([15 + .1, 15 + .1]));
+            region(cutouts(15 + .1, 1));
           }
         screws() screw_top();
       }
