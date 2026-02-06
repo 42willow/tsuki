@@ -1,6 +1,7 @@
 $fn = 30;
 
 include <lib/BOSL2/std.scad>;
+include <./outline.scad>;
 use <./plate.scad>;
 
 height = 3;
@@ -8,10 +9,11 @@ height = 3;
 render() cover();
 
 module cover() {
-  color("brown") translate([0, 0, 5.5 - 2.2])
-      difference() {
-        linear_extrude(3) outlines();
-        cutouts([15 + .1, 15 + .1]);
+  color("brown") up(5.5 - 2.2) difference() {
+        linear_extrude(3) difference() {
+            region(outlines);
+            region(cutouts([15 + .1, 15 + .1]));
+          }
         screws() screw_top();
       }
 }

@@ -1,6 +1,7 @@
 $fn = 30;
 
 include <lib/BOSL2/std.scad>;
+include <./outline.scad>;
 include <../dist/points.scad>;
 use <./mount.scad>;
 
@@ -25,16 +26,16 @@ render() plate();
 module plate() {
   difference() {
     union() {
-      difference() {
-        linear_extrude(height) offset(gasket[1] + .5) outlines();
-        cutouts();
-      }
+      linear_extrude(height) difference() {
+          region(offset(outlines, r=gasket[1] + .5));
+          region(cutouts());
+        }
       mounts();
     }
 
     difference() {
-      up(1) linear_extrude(height - 1) offset(5) outlines();
-      linear_extrude(height) outlines();
+      up(1) linear_extrude(height - 1) region(offset(outlines, r=5));
+      linear_extrude(height) region(outlines);
     }
 
     screws() screw_bottom();
@@ -72,22 +73,13 @@ module mounts() {
   }
 }
 
-module cutouts(size = [cx, cy]) {
-  linear_extrude(height) {
-    for (point = points) {
-      translate([point[0], point[1], 0])
-        rotate([0, 0, point[2]])
-          square(size, center=true);
-    }
-  }
-}
-
-module outlines() {
-  translate([cx / 2, 0]) svg();
-  mirror([1, 0]) translate([cx / 2, 0]) svg();
-
-  module svg() offset(1) import("./outline.svg", layer="main");
-}
+function cutouts(size = [cx, cy]) =
+  [
+    for (point = points) move(
+      [point[0], point[1]],
+      p=zrot(point[2], p=square(size, center=true))
+    ),
+  ];
 
 module screws() {
   for (pos = screws) {

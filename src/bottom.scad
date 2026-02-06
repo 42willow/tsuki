@@ -1,6 +1,7 @@
 $fn = 30;
 
 include <lib/BOSL2/std.scad>;
+include <./outline.scad>;
 use <./plate.scad>;
 
 height = 3 * 2 + 3.3 + 2;
@@ -10,7 +11,7 @@ render() bottom();
 
 module bottom() {
   color("blue") difference() {
-      down(3 + 2.9) linear_extrude(3) offset(5) outlines();
-      down(2) linear_extrude(2) outlines();
+      down(3 + 2.9) linear_extrude(3) region(offset(outlines, r=5));
+      down(2) linear_extrude(2) region(outlines);
     }
 }
