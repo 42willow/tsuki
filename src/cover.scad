@@ -3,6 +3,7 @@ $fn = 30;
 include <lib/BOSL2/std.scad>;
 include <./outline.scad>;
 use <./plate.scad>;
+use <./components.scad>;
 
 height = 3;
 
