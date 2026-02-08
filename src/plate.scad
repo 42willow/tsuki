@@ -27,6 +27,10 @@ module plate() {
     screws() screw_bottom();
 
     column_wires();
-    xflip() column_wires();
+    row_wires();
+    xflip() {
+      column_wires();
+      row_wires();
+    }
   }
 }
