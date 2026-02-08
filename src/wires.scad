@@ -1,5 +1,6 @@
 include <lib/BOSL2/std.scad>;
 include <./vars.scad>;
+include <./outline.scad>;
 
 far_x = 9 + diam / 2;
 close_y = 3.8 - .08;
@@ -21,16 +22,14 @@ matrix = [
 ];
 
 module row_wires() {
-  row_offsets = [
-    [close_x, 5],
-    [close_x, 5],
-    [close_x, 5],
-    [close_x, 5],
-    [far_x, 10],
-  ];
-
-  for (i = [0:len(matrix) - 1]) {
-    row_wire(matrix[i], row_offsets);
+  // main
+  for (i = [0:2]) fwd(cy * i + 7) channel();
+  module channel() {
+    path = outlines;
+    down(diam / 2) linear_extrude(diam * 2) intersection() {
+          stroke(path);
+          move([points[2][0] + far_x - diam, 50]) rect([68, 30], anchor=[-1, -1]);
+        }
   }
 }
 
@@ -52,35 +51,6 @@ module column_wires() {
   for (i = [0:len(transposed_matrix) - 1]) {
     column_wire(transposed_matrix[i], column_offsets[i]);
   }
-}
-
-module row_wire(
-  row,
-  offsets
-) {
-  points =
-  round_corners(
-    [
-      for (i = [0:len(row) - 1]) each if (i == 0) [
-        // first
-        solder_point(row[i], offsets[i], horiz=0),
-        solder_point(row[i], offsets[i], horiz=12),
-      ] else if (i == len(row) - 1) [
-        // last
-        solder_point(row[i], offsets[i], horiz=0),
-        solder_point(row[i], offsets[i], horiz=4),
-      ] else [
-        solder_point(row[i], offsets[i], horiz=0),
-        solder_point(row[i], offsets[i], horiz=12),
-      ],
-    ],
-    closed=false,
-    r=0
-  );
-
-  wire = square([diam, diam * 2], center=true);
-
-  up(diam / 2) path_sweep2d(wire, points);
 }
 
 module column_wire(
@@ -110,16 +80,14 @@ module column_wire(
 }
 
 v_offset = 1.68 - diam / 2;
-function solder_point(key, offset, vert = 0, horiz = 0) =
+function solder_point(key, offset, vert = 0) =
   zrot(
     a=key[2],
     cp=[key[0], key[1]],
-    p=left(
-      x=horiz, p=back(
-        y=(v_offset * vert), p=move(
-          v=offset,
-          p=[key[0], key[1]]
-        )
+    p=back(
+      y=(v_offset * vert), p=move(
+        v=offset,
+        p=[key[0], key[1]]
       )
     )
   );
