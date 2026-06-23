@@ -1,53 +1,36 @@
+$fn = 30;
+
 include <lib/BOSL2/std.scad>;
 include <./vars.scad>;
 include <./outline.scad>;
 
-far_x = 9 + diam / 2;
-close_y = 3.8 - .08;
-close_x = 4.3 + diam / 2;
-far_y = 5.9;
-
-column_wires();
-row_wires();
-
-for (point = flatten(matrix)) {
-  color("red") move([point[0], point[1]]) circle(r=1);
+module row_wires(bez, N = 3) {
+  down(diam / 2) linear_extrude(diam * 2) {
+      for (i = [0:2])
+        fwd(2.5 + cy * i)
+          stroke(
+            width=diam,
+            endcaps="butt",
+            bezpath_curve(bez, N=N)
+          );
+    }
 }
 
-matrix = [
-  [points[14], points[11], points[8], points[5], points[2]],
-  [points[13], points[10], points[7], points[4], points[1]],
-  [points[12], points[9], points[6], points[3], points[0]],
-  [points[16], points[15]],
-];
-
-module row_wires() {
-  // main
-  for (i = [0:2]) fwd(cy * i + 7) channel();
-  module channel() {
-    path = outlines;
-    down(diam / 2) linear_extrude(diam * 2) intersection() {
-          stroke(path);
-          move([points[2][0] + far_x - diam, 50]) rect([68, 30], anchor=[-1, -1]);
-        }
-  }
-}
-
-module column_wires() {
-  column_offsets = [
-    [-far_x, -close_y],
-    [-far_x, -close_y],
-    [-far_x, -close_y],
-    [close_x, -far_y],
-    [-close_x, far_y],
-  ];
-
+module column_wires(matrix, column_offsets) {
   transposed_matrix = [
     for (j = [0:max([for (row = matrix) len(row)]) - 1]) [
       for (i = [0:len(matrix) - 1]) if (j < len(matrix[i])) matrix[i][j],
     ],
   ];
 
+  // wells at the top of each column
+  linear_extrude(2)for (i = [0:len(matrix[0]) - 1]) {
+    key = matrix[0][i];
+    echo(key);
+    move([key[0], key[1] + 2.68 / 2]) move(column_offsets[i]) rect(3, rounding=1, anchor=[0, -1]);
+  }
+
+  // wire channels
   for (i = [0:len(transposed_matrix) - 1]) {
     column_wire(transposed_matrix[i], column_offsets[i]);
   }
@@ -79,7 +62,7 @@ module column_wire(
   path_sweep2d(wire, points);
 }
 
-v_offset = 1.68 - diam / 2;
+v_offset = 1.68;
 function solder_point(key, offset, vert = 0) =
   zrot(
     a=key[2],

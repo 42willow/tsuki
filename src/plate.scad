@@ -26,11 +26,11 @@ module plate() {
 
     screws() screw_bottom();
 
-    column_wires();
-    row_wires();
-    xflip() {
-      column_wires();
-      row_wires();
-    }
+    column_wires(left_matrix, left_column_offsets);
+    row_wires(left_row_bez);
+    column_wires(right_matrix, right_column_offsets);
+    row_wires(right_row_bez, N=4);
   }
 }
+// debug_bezier(left_row_bez, width=1);
+// debug_bezier(right_row_bez, width=1, N=4);

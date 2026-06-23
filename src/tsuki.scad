@@ -11,10 +11,5 @@ render() difference() {
       cover();
       bottom();
     }
-    left(500) down(25) fwd(30) cube([1000, 38, 50]);
+    // left(500) down(25) fwd(30) cube([1000, 38, 50]);
   }
-
-// battery
-// color("red") translate([35, 0, 8]) {
-//     square(size=[30, 12], center=false);
-//   }
