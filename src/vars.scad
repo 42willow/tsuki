@@ -6,7 +6,7 @@ kx = cx - .5;
 ky = cy - .5;
 
 height = 5.5 - 2.20;
-diam = 2; // wire diameter (actual 1.2)
+diam = 1.9; // wire diameter (actual 1.2)
 gasket = [30, 3, 3];
 
 screws = [
@@ -54,6 +54,21 @@ right_column_offsets = [
 ];
 
 // these are identical for each row, this just defined the top row
+left_well_xs = [
+  points[14][0] + close_x,
+  points[11][0] + close_x,
+  points[8][0] + close_x,
+  points[5][0] - far_x,
+];
+
+right_well_xs = [
+  points[19][0] + far_x,
+  points[22][0] - far_x,
+  points[25][0] - far_x,
+  points[28][0] - far_x,
+  points[31][0] - far_x,
+];
+
 left_row_bez = [
   [points[14][0] + close_x, points[14][1] + cy / 3],
   [points[11][0] - cx / 3, points[11][1] + cy / 3],
@@ -62,7 +77,7 @@ left_row_bez = [
 ];
 
 right_row_bez = [
-  [points[19][0] + close_x + diam, points[19][1] - close_y],
+  [points[19][0] + far_x, points[19][1] - close_y],
   [points[25][0] + 6, points[19][1] - close_y],
   [points[25][0], 72],
   [points[25][0] - 6, points[19][1] - close_y],

@@ -23,13 +23,6 @@ module column_wires(matrix, column_offsets) {
     ],
   ];
 
-  // wells at the top of each column
-  linear_extrude(2)for (i = [0:len(matrix[0]) - 1]) {
-    key = matrix[0][i];
-    echo(key);
-    move([key[0], key[1] + 2.68 / 2]) move(column_offsets[i]) rect(3, rounding=1, anchor=[0, -1]);
-  }
-
   // wire channels
   for (i = [0:len(transposed_matrix) - 1]) {
     column_wire(transposed_matrix[i], column_offsets[i]);
@@ -60,6 +53,23 @@ module column_wire(
   wire = square([diam, diam], center=true);
 
   path_sweep2d(wire, points);
+}
+
+function _nearest_on_curve(curve, x) =
+  let (
+    diffs = [for (p = curve) abs(p[0] - x)],
+    min_diff = min(diffs),
+    idx = search(min_diff, diffs)[0]
+  ) curve[idx];
+
+module row_wells(bez, xs, N = 3) {
+  curve = bezpath_curve(bez, N=N, splinesteps=200);
+  for (i = [0:2])
+    fwd(2.5 + cy * i)for (x = xs)
+      let (pt = _nearest_on_curve(curve, x))
+      translate([pt[0], pt[1], 0])
+        rotate([0, 90, 0])
+          cylinder(h=2, d=5.7, center=true);
 }
 
 v_offset = 1.68;
