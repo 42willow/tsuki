@@ -72,6 +72,17 @@ module row_wells(bez, xs, N = 3) {
           cylinder(h=2, d=5.7, center=true);
 }
 
+module column_wells(matrix, column_offsets) {
+  for (i = [0:len(matrix[0]) - 1]) {
+    key = matrix[0][i];
+    pt = solder_point(key, column_offsets[i], vert=1);
+    translate([pt[0], pt[1], 0])
+      back(1)
+        rotate([90, 0, 0])
+          cylinder(h=2, d=4, center=true);
+  }
+}
+
 v_offset = 1.68;
 function solder_point(key, offset, vert = 0) =
   zrot(
