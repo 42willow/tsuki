@@ -69,7 +69,7 @@ module row_wells(bez, xs, N = 3) {
       let (pt = _nearest_on_curve(curve, x))
       translate([pt[0], pt[1], 0])
         rotate([0, 90, 0])
-          cylinder(h=2, d=5.7, center=true);
+          cylinder(h=2, d=5.4, center=true);
 }
 
 module column_wells(matrix, column_offsets) {

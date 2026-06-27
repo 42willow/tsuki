@@ -6,7 +6,7 @@ kx = cx - .5;
 ky = cy - .5;
 
 height = 5.5 - 2.20;
-diam = 1.9; // wire diameter (actual 1.2)
+diam = 1.8; // wire diameter (actual 1.2)
 gasket = [30, 3, 3];
 
 screws = [
@@ -62,7 +62,7 @@ left_well_xs = [
 ];
 
 right_well_xs = [
-  points[19][0] + far_x,
+  points[19][0] + far_x - diam,
   points[22][0] - far_x,
   points[25][0] - far_x,
   points[28][0] - far_x,
@@ -77,7 +77,7 @@ left_row_bez = [
 ];
 
 right_row_bez = [
-  [points[19][0] + far_x, points[19][1] - close_y],
+  [points[19][0] + far_x - diam, points[19][1] - close_y],
   [points[25][0] + 6, points[19][1] - close_y],
   [points[25][0], 72],
   [points[25][0] - 6, points[19][1] - close_y],

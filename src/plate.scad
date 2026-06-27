@@ -20,7 +20,7 @@ module plate() {
     }
 
     difference() {
-      up(1) linear_extrude(height - 1) region(offset(outlines, r=5));
+      up(1.5) linear_extrude(height - 1.5) region(offset(outlines, r=5));
       linear_extrude(height) region(outlines);
     }
 
