@@ -21,7 +21,7 @@ module screws() {
 
 module screw_bottom() {
   union() {
-    linear_extrude(height - 3 + 1.7) rotate([0, 0, 30]) hexagon(r=2);
-    cylinder(h=height, d=2);
+    linear_extrude(height - 3 + 1.7) rotate([0, 0, 30]) hexagon(d=4 + 0.5); // compensation
+    cylinder(h=height, d=2 + 0.3);
   }
 }

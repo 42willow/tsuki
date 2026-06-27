@@ -1,4 +1,4 @@
-$fn = 30;
+$fn = $preview ? 30 : 120;
 
 include <lib/BOSL2/std.scad>;
 include <./outline.scad>;
