@@ -1,7 +1,6 @@
 $fn = 30;
 
 include <lib/BOSL2/std.scad>;
-include <../dist/points.scad>;
 include <./vars.scad>;
 
 function cutouts(size = [cx, cy], rounding = 0) =
