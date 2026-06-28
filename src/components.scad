@@ -32,8 +32,8 @@ module component_cutouts() {
       linear_extrude(mcu_depth)
         rect(mcu_size);
       linear_extrude(height) {
-        left(mcu_size[0] / 2 - 1) rect([2, mcu_size[1]]);
-        right(mcu_size[0] / 2 - 1) rect([2, mcu_size[1]]);
+        left(mcu_size[0] / 2 - 1.25) rect([2.5, mcu_size[1]]);
+        right(mcu_size[0] / 2 - 1.25) rect([2.5, mcu_size[1]]);
       }
     }
 
