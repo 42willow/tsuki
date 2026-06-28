@@ -13,14 +13,14 @@ module plate() {
   difference() {
     union() {
       linear_extrude(height) difference() {
-          region(offset(outlines, r=gasket[1] + gasket_offset_tolerance));
+          region(offset(outlines, r=gasket[1] + gasket_offset));
           region(cutouts());
         }
       mounts();
     }
 
     difference() {
-      up(chamfer_offset) linear_extrude(height - chamfer_offset) region(offset(outlines, r=outline_offset));
+      up(chamfer_inset) linear_extrude(height - chamfer_inset) region(offset(outlines, r=outline_offset));
       linear_extrude(height) region(outlines);
     }
 

@@ -1,6 +1,5 @@
 $fn = 100;
 
-include <../dist/points.scad>;
 include <./vars.scad>;
 
 // plate key mount

@@ -1,29 +1,31 @@
 include <../dist/points.scad>;
 
-// tolerances and compensations
-nut_height = 1.7;
+// tolerances and compensations calibrated for 0.4mm nozzle (FDM)
 
-key_tolerance = 0.5;
-gasket_offset_tolerance = 0.5;
+// cover
 switch_cutout_tolerance = 0.1;
+
+// plate
 screw_hex_tolerance = 0.5;
 screw_shaft_tolerance = 0.3;
 hotswap_tolerance = 0.3;
 center_hole_tolerance = 0.2;
 pin_hole_tolerance = 0.08;
-wire_diam_tolerance = 0.8;
+wire_diam_tolerance = 0.6;
 
 outline_offset = 5;
-chamfer_offset = 1.5;
+gasket_offset = 0.5;
+chamfer_inset = 1.5;
 
 cx = 18;
 cy = 17;
-kx = cx - key_tolerance;
-ky = cy - key_tolerance;
+kx = cx - 0.5;
+ky = cy - 0.5;
 
 height = 5.5 - 2.20;
 wire_diam = 1.2 + wire_diam_tolerance;
 gasket = [30, 3, 3];
+nut_height = 1.7;
 
 screws = [
   [1.6 * cx, 2],
@@ -37,7 +39,7 @@ close_y = 3.8 - .08;
 close_x = 4.3 + wire_diam / 2;
 far_y = 5.9;
 
-// TODO right and left are when viewed from bottom, i.e. they are reversed
+// right and left are when viewed from bottom, i.e. they are reversed IRL
 
 left_matrix = [
   [points[14], points[11], points[8], points[5], points[2]],
