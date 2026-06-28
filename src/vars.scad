@@ -1,12 +1,28 @@
 include <../dist/points.scad>;
 
+// tolerances and compensations
+nut_height = 1.7;
+
+key_tolerance = 0.5;
+gasket_offset_tolerance = 0.5;
+switch_cutout_tolerance = 0.1;
+screw_hex_tolerance = 0.5;
+screw_shaft_tolerance = 0.3;
+hotswap_tolerance = 0.3;
+center_hole_tolerance = 0.2;
+pin_hole_tolerance = 0.08;
+wire_diam_tolerance = 0.8;
+
+outline_offset = 5;
+chamfer_offset = 1.5;
+
 cx = 18;
 cy = 17;
-kx = cx - .5;
-ky = cy - .5;
+kx = cx - key_tolerance;
+ky = cy - key_tolerance;
 
 height = 5.5 - 2.20;
-diam = 1.8; // wire diameter (actual 1.2)
+wire_diam = 1.2 + wire_diam_tolerance;
 gasket = [30, 3, 3];
 
 screws = [
@@ -16,9 +32,9 @@ screws = [
   [114, 50.7],
 ];
 
-far_x = 9 + diam / 2;
+far_x = 9 + wire_diam / 2;
 close_y = 3.8 - .08;
-close_x = 4.3 + diam / 2;
+close_x = 4.3 + wire_diam / 2;
 far_y = 5.9;
 
 // TODO right and left are when viewed from bottom, i.e. they are reversed
@@ -80,11 +96,11 @@ left_row_bez = [
   [points[14][0] + close_x, points[14][1] + cy / 3],
   [points[11][0] - cx / 3, points[11][1] + cy / 3],
   [points[8][0] + cx / 3, points[8][1] + cy],
-  [points[2][0] + far_x - diam, points[2][1] + cy * .9],
+  [points[2][0] + far_x - wire_diam, points[2][1] + cy * .9],
 ];
 
 right_row_bez = [
-  [points[19][0] + far_x - diam, points[19][1] - close_y],
+  [points[19][0] + far_x - wire_diam, points[19][1] - close_y],
   [points[25][0] + 6, points[19][1] - close_y],
   [points[25][0], 72],
   [points[25][0] - 6, points[19][1] - close_y],
