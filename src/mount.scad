@@ -1,19 +1,11 @@
 $fn = 100;
 
-include <../dist/points.scad>;
+include <./vars.scad>;
 
 // plate key mount
 
 // https://github.com/keyboardio/keyswitch_documentation/blob/master/datasheets/Kailh/CPG1353S01D01-01.pdf
 // https://github.com/keyboardio/keyswitch_documentation/blob/master/datasheets/Kailh/CPG135001S30-Choc-Socket.pdf
-
-height = 5.5 - 2.20;
-
-tolerances = [
-  .26, // hotswap
-  .18, // central hole
-  .03, // pin holes
-];
 
 translate([0, 0, height])
   rotate([0, 180, 0])
@@ -58,7 +50,7 @@ module hotswap() {
   linear_extrude(2)
     // translate([5.0, 9.7])
     rotate([0, 0, 0])
-      offset(delta=tolerances[0])
+      offset(delta=hotswap_tolerance)
         import("../assets/choc_hotswap.dxf");
 }
 
@@ -69,10 +61,10 @@ module inner() {
     union() {
       // holes
       linear_extrude(height) {
-        circle(d=4.80 + tolerances[1]);
+        circle(d=4.80 + center_hole_tolerance);
 
-        translate([0, 5.90]) circle(d=3 + tolerances[2]);
-        translate([5, 3.80]) circle(d=3 + tolerances[2]);
+        translate([0, 5.90]) circle(d=3 + pin_hole_tolerance);
+        translate([5, 3.80]) circle(d=3 + pin_hole_tolerance);
       }
     }
   }

@@ -5,11 +5,11 @@ include <./vars.scad>;
 include <./outline.scad>;
 
 module row_wires(bez, N = 3) {
-  down(diam / 2) linear_extrude(diam * 2) {
+  down(wire_diam / 2) linear_extrude(wire_diam * 2) {
       for (i = [0:2])
         fwd(2.5 + cy * i)
           stroke(
-            width=diam,
+            width=wire_diam,
             endcaps="butt",
             bezpath_curve(bez, N=N)
           );
@@ -50,7 +50,7 @@ module column_wire(
     r=4
   );
 
-  wire = square([diam, diam], center=true);
+  wire = square([wire_diam, wire_diam], center=true);
 
   path_sweep2d(wire, points);
 }
