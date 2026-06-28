@@ -8,17 +8,28 @@ use <./components.scad>;
 
 cover_thickness = 3;
 
-render() cover();
+module cover_2d() {
+  union() {
+    difference() {
+      region(outlines);
+      region(cutouts(15 + switch_cutout_tolerance, 1));
+      screws() circle(d=4);
+    }
+    screws() circle(d=2);
+  }
+}
 
 module cover() {
   color("brown") up(height) difference() {
-        linear_extrude(cover_thickness) difference() {
-            region(outlines);
-            region(cutouts(15 + switch_cutout_tolerance, 1));
-          }
-        screws() screw_top();
-      }
+    linear_extrude(cover_thickness) difference() {
+      region(outlines);
+      region(cutouts(15 + switch_cutout_tolerance, 1));
+    }
+    screws() screw_top();
+  }
 }
+
+render() cover_2d();
 
 module screw_top() {
   union() {
