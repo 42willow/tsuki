@@ -6,7 +6,7 @@ include <../dist/points.scad>;
 switch_cutout_tolerance = 0.1;
 
 // plate
-screw_hex_tolerance = 0.5;
+screw_hex_tolerance = 0.7;
 screw_shaft_tolerance = 0.3;
 hotswap_tolerance = 0.3;
 center_hole_tolerance = 0.2;
