@@ -53,6 +53,13 @@ right_column_offsets = [
   [-close_x, far_y],
 ];
 
+mcu_size = [18, 34];
+mcu_depth = 1.8;
+mcu_pos = [108.5, 29];
+
+charging_module_size = 9;
+charging_module_pos = [points[8][0], 5];
+
 // these are identical for each row, this just defined the top row
 left_well_xs = [
   points[14][0] + close_x,
@@ -62,7 +69,7 @@ left_well_xs = [
 ];
 
 right_well_xs = [
-  points[19][0] + far_x - diam,
+  points[19][0] + far_x,
   points[22][0] - far_x,
   points[25][0] - far_x,
   points[28][0] - far_x,
@@ -81,5 +88,5 @@ right_row_bez = [
   [points[25][0] + 6, points[19][1] - close_y],
   [points[25][0], 72],
   [points[25][0] - 6, points[19][1] - close_y],
-  [points[31][0] - far_x, points[31][1] - far_x],
+  [points[31][0] - far_x + 3, points[31][1] - far_x],
 ];

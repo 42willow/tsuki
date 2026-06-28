@@ -25,3 +25,17 @@ module screw_bottom() {
     cylinder(h=height, d=2 + 0.3);
   }
 }
+
+module component_cutouts() {
+  for (sign = [1, -1]) {
+    // MCU (recessed)
+    translate([sign * mcu_pos[0], mcu_pos[1], 0])
+      linear_extrude(mcu_depth)
+        rect(mcu_size);
+
+    // charging module hole
+    translate([sign * charging_module_pos[0], charging_module_pos[1], 0])
+      linear_extrude(height)
+        rect(charging_module_size, rounding=3);
+  }
+}

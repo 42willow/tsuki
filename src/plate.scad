@@ -26,6 +26,8 @@ module plate() {
 
     screws() screw_bottom();
 
+    component_cutouts();
+
     column_wires(left_matrix, left_column_offsets);
     column_wells(left_matrix, left_column_offsets);
     row_wires(left_row_bez);
