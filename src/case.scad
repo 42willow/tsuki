@@ -60,10 +60,16 @@ module bottom_case() {
 }
 
 module magnets() {
-  linear_extrude(3) hull() {
-      translate([11, points[1][1]]) circle(d=4);
-      translate([133, points[1][1]]) circle(d=4);
-    }
+  linear_extrude(3) {
+    translate([11, points[1][1]]) hull() {
+        circle(d=4);
+        translate([1.5, 0]) circle(d=4);
+      }
+    translate([133, points[1][1]]) hull() {
+        circle(d=4);
+        translate([-1.5, 0]) circle(d=4);
+      }
+  }
 }
 
 module top_case() {
@@ -101,6 +107,6 @@ render() difference() {
       top_case();
       bottom_case();
     }
-    left(500) down(25) fwd(30) cube([1000, 38, 50]);
-    left(50) cube([200, 200, 50], center=true);
+    // left(500) down(25) fwd(30) cube([1000, 38, 50]);
+    // left(50) cube([200, 200, 50], center=true);
   }
