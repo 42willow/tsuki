@@ -28,10 +28,10 @@ gasket = [30, 3, 3];
 nut_height = 1.7;
 
 screws = [
-  [1.6 * cx, 2],
-  [cx, 56],
-  [114, 8],
-  [114, 50.7],
+  [1.6 * cx + cx / 2, 2],
+  [cx + cx / 2, 56],
+  [114 + cx / 2, 8],
+  [114 + cx / 2, 50.7],
 ];
 
 far_x = 9 + wire_diam / 2;
@@ -73,7 +73,7 @@ right_column_offsets = [
 
 mcu_size = [18, 34];
 mcu_depth = 1.8;
-mcu_pos = [108.5, 29];
+mcu_pos = [108.5 + cx / 2, 29];
 
 charging_module_size = 9;
 charging_module_pos = [points[8][0], 5];

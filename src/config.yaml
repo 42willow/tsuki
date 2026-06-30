@@ -14,7 +14,7 @@ points:
       key:
         spread: 1cx
         padding: 1cy
-      anchor.shift: [cx, cy/2]
+      anchor.shift: [1.5cx, cy/2]
       columns:
         pinky:
         ring.key.stagger: 0.70cy
@@ -40,4 +40,4 @@ points:
           key.name: thumb_reachy
   mirror:
     ref: matrix_pinky_bottom
-    distance: -2cx
+    distance: -3cx
