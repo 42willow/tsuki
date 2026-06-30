@@ -29,13 +29,12 @@ stdenv.mkDerivation {
     mkdir -p dist/lib
     cp -r ${inputs.bosl2} dist/lib/BOSL2
 
-    for f in plate bottom; do
+    for f in plate case; do
       (cd dist && openscad-unstable -o "$out/$f.stl" "$f.scad")
     done
 
     (cd dist && openscad-unstable -o "$out/cover.dxf" cover.scad)
 
-    chmod -R +w dist
-    rm -rf dist
+    cp -r dist "$out/"
   '';
 }
