@@ -13,7 +13,7 @@ module plate() {
   difference() {
     union() {
       linear_extrude(height) difference() {
-          region(offset(outlines, r=gasket[1] + gasket_offset));
+          region(offset(outlines, r=plate_lip));
           region(cutouts());
         }
       mounts();

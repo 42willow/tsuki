@@ -7,9 +7,12 @@ use <./case.scad>;
 
 render() difference() {
     union() {
-      plate();
-      cover();
+      down(1.5) {
+        plate();
+        cover();
+      }
+      top_case();
       bottom_case();
     }
-    left(500) down(25) fwd(30) cube([1000, 38, 50]);
+    // left(500) down(25) fwd(30) cube([1000, 38, 50]);
   }

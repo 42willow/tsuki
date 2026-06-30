@@ -14,7 +14,6 @@ pin_hole_tolerance = 0.08;
 wire_diam_tolerance = 0.6;
 
 outline_offset = 5;
-gasket_offset = 0.5;
 chamfer_inset = 1.5;
 
 cx = 18;
@@ -24,8 +23,11 @@ ky = cy - 0.5;
 
 height = 5.5 - 2.20;
 wire_diam = 1.2 + wire_diam_tolerance;
-gasket = [30, 3, 3];
 nut_height = 1.7;
+
+gasket = [3, 30, 3];
+plate_lip = gasket[0] + 0.5;
+gasket_squish = gasket[2] - 0.1;
 
 screws = [
   [1.6 * cx + cx / 2, 2],
@@ -39,7 +41,8 @@ close_y = 3.8 - .08;
 close_x = 4.3 + wire_diam / 2;
 far_y = 5.9;
 
-// right and left are when viewed from bottom, i.e. they are reversed IRL
+// right and left are when viewed from bottom in CAD
+// i.e. the real order IRL when you line up the thumb clusters
 
 left_matrix = [
   [points[14], points[11], points[8], points[5], points[2]],
