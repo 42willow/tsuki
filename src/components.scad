@@ -40,6 +40,6 @@ module component_cutouts() {
     // charging module hole
     translate([sign * charging_module_pos[0], charging_module_pos[1], 0])
       linear_extrude(height)
-        rect(charging_module_size, rounding=3);
+        rect(charging_module_size, rounding=1);
   }
 }

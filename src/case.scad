@@ -77,7 +77,7 @@ module bottom_case() {
 }
 
 module magnets() {
-  linear_extrude(3 + .1) magnet_profile_2d();
+  linear_extrude(3 + .7) magnet_profile_2d();
 }
 
 module top_case() {

@@ -79,7 +79,7 @@ mcu_depth = 1.8;
 mcu_pos = [108.5 + cx / 2, 29];
 
 charging_module_size = 9;
-charging_module_pos = [points[8][0], 5];
+charging_module_pos = [points[8][0], 8];
 
 // these are identical for each row, this just defined the top row
 left_well_xs = [
