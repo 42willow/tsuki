@@ -6,6 +6,8 @@ include <./vars.scad>;
 
 wall_t = 5; // wall thickness
 outer_r = 2;
+top_rx = wall_t;
+top_ry = 2;
 top_h = height + 3 - 1.5;
 bottom_h = 6 + 1.5;
 
@@ -78,7 +80,16 @@ module top_case() {
       up(lip_clearance) offset_sweep(
           case_rgn,
           height=top_h - lip_clearance,
-          top=os_circle(r=outer_r),
+          top=os_profile(
+            points=concat(
+              [[0, 0]], [
+                for (i = [1:16]) let (t = i * 90 / 16) [
+                    top_rx * (1 - cos(t)),
+                    top_ry * sin(t),
+                ],
+              ]
+            )
+          ),
         );
 
       // clear empty space
