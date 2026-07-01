@@ -62,16 +62,10 @@ module bottom_case() {
 }
 
 module magnets() {
-  linear_extrude(3) {
-    translate([11, points[1][1]]) hull() {
-        circle(d=4);
-        translate([1.5, 0]) circle(d=4);
-      }
-    translate([133, points[1][1]]) hull() {
-        circle(d=4);
-        translate([-1.5, 0]) circle(d=4);
-      }
-  }
+  linear_extrude(3) hull() {
+      translate([11, points[1][1]]) circle(d=4);
+      translate([133, points[1][1]]) circle(d=4);
+    }
 }
 
 module top_case() {
