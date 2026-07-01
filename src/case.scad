@@ -4,10 +4,8 @@ include <lib/BOSL2/std.scad>;
 include <./outline.scad>;
 include <./vars.scad>;
 
-wall_t = 5; // wall thickness
+wall_t = 3; // wall thickness
 outer_r = 2;
-top_rx = wall_t;
-top_ry = 2;
 top_h = height + 3 - 1.5;
 bottom_h = 6 + 1.5;
 
@@ -37,23 +35,40 @@ module bottom_case() {
             }
         }
 
-        // clear empty space
+        // clear bottom ridge
         down(bottom_h - 2)
           linear_extrude(bottom_h)
             region(outlines);
-        down(1.5 + gasket_squish)
+
+        down(1.5 + gasket_squish) {
+          // clear gasket ridge
+
           linear_extrude(bottom_h)
-            region(offset(case_rgn, -wall_t));
+            difference() {
+              region(offset(case_rgn, -wall_t));
+              union() {
+                offset(r=1) magnet_profile_2d();
+                xflip() offset(r=1) magnet_profile_2d();
+              }
+            }
+
+          // clear magnet inset on ridge
+          linear_extrude(bottom_h)
+            region(offset(outlines, r=.2));
+        }
 
         // magnets
         down(3.5) {
           magnets();
           xflip() magnets();
         }
-        up(.5) {
-          magnets();
-          xflip() magnets();
-        }
+
+        // notch for case magnet wall clearance
+        linear_extrude(height)
+          union() {
+            offset(r=1.3) magnet_profile_2d();
+            xflip() offset(r=1.3) magnet_profile_2d();
+          }
       }
     }
   // TODO battery slot
@@ -62,10 +77,7 @@ module bottom_case() {
 }
 
 module magnets() {
-  linear_extrude(3) hull() {
-      translate([11, points[1][1]]) circle(d=4);
-      translate([133, points[1][1]]) circle(d=4);
-    }
+  linear_extrude(3 + .1) magnet_profile_2d();
 }
 
 module top_case() {
@@ -74,21 +86,18 @@ module top_case() {
       up(lip_clearance) offset_sweep(
           case_rgn,
           height=top_h - lip_clearance,
-          top=os_profile(
-            points=concat(
-              [[0, 0]], [
-                for (i = [1:16]) let (t = i * 90 / 16) [
-                    top_rx * (1 - cos(t)),
-                    top_ry * sin(t),
-                ],
-              ]
-            )
-          ),
+          top=os_circle(r=outer_r),
         );
 
-      // clear empty space
-      linear_extrude(gasket_squish) // TODO
-        region(offset(case_rgn, -wall_t));
+      // clear empty space (leave 1mm wall around magnets)
+      linear_extrude(gasket_squish)
+        difference() {
+          region(offset(case_rgn, -wall_t));
+          union() {
+            offset(r=1) magnet_profile_2d();
+            xflip() offset(r=1) magnet_profile_2d();
+          }
+        }
       linear_extrude(top_h)
         region(offset(outlines, r=.2));
 
@@ -97,6 +106,11 @@ module top_case() {
         difference() {
           region(offset(case_rgn, -wall_t + lip_w + lip_clearance));
           region(offset(case_rgn, -wall_t));
+          // avoid magnet area
+          union() {
+            offset(r=1) magnet_profile_2d();
+            xflip() offset(r=1) magnet_profile_2d();
+          }
         }
 
       // magnets

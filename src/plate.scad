@@ -24,6 +24,18 @@ module plate() {
       linear_extrude(height) region(outlines);
     }
 
+    // cutouts for magnets
+    intersection() {
+      linear_extrude(height) union() {
+          offset(r=1.3) magnet_profile_2d();
+          xflip() offset(r=1.3) magnet_profile_2d();
+        }
+      difference() {
+        linear_extrude(height) region(offset(outlines, r=outline_offset));
+        linear_extrude(height) region(outlines);
+      }
+    }
+
     screws() screw_bottom();
 
     component_cutouts();

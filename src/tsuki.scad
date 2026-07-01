@@ -15,4 +15,5 @@ render() difference() {
       bottom_case();
     }
     // left(500) down(25) fwd(30) cube([1000, 38, 50]);
+    // left(50) cube([300, 200, 50], center=true);
   }

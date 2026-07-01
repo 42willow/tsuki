@@ -111,3 +111,10 @@ right_row_bez = [
   [points[25][0] - 6, points[19][1] - close_y],
   [points[31][0] - far_x + 3, points[31][1] - far_x],
 ];
+
+module magnet_profile_2d() {
+  hull() {
+    translate([14 - .3, points[1][1]]) rect(4);
+    translate([130 + .3, points[1][1]]) rect(4);
+  }
+}
