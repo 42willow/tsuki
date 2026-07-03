@@ -5,9 +5,9 @@ include <./vars.scad>;
 include <./outline.scad>;
 
 module row_wires(bez, N = 3) {
-  down(wire_diam / 2) linear_extrude(wire_diam * 2) {
+  up(height - 2) linear_extrude(2.2) {
       for (i = [0:2])
-        fwd(2.5 + cy * i)
+        fwd(cy * i)
           stroke(
             width=wire_diam,
             endcaps="butt",

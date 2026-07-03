@@ -59,11 +59,11 @@ right_matrix = [
 ];
 
 left_column_offsets = [
-  [-far_x, -close_y],
-  [-far_x, -close_y],
-  [-far_x, -close_y],
   [close_x, -far_y],
-  [-close_x, far_y],
+  [close_x, -far_y],
+  [close_x, -far_y],
+  [close_x, -far_y],
+  [close_x, -far_y],
 ];
 
 right_column_offsets = [
@@ -71,12 +71,12 @@ right_column_offsets = [
   [close_x, -far_y],
   [close_x, -far_y],
   [close_x, -far_y],
-  [-close_x, far_y],
+  [close_x, -far_y],
 ];
 
 mcu_size = [18, 34];
 mcu_depth = 1.8;
-mcu_pos = [108.5 + cx / 2, 29];
+mcu_pos = [117, 29];
 
 charging_module_size = 9;
 charging_module_pos = [points[8][0], 8];
@@ -98,18 +98,19 @@ right_well_xs = [
 ];
 
 left_row_bez = [
-  [points[14][0] + close_x, points[14][1] + cy / 3],
-  [points[11][0] - cx / 3, points[11][1] + cy / 3],
-  [points[8][0] + cx / 3, points[8][1] + cy],
-  [points[2][0] + far_x - wire_diam, points[2][1] + cy * .9],
+  [points[2][0] - 3.25, points[2][1] + 5],
+  [35, 50],
+  [57, 87],
+  [74, 58],
+  [points[14][0] - 3.25, points[14][1] + 5],
 ];
 
 right_row_bez = [
-  [points[19][0] + far_x - wire_diam, points[19][1] - close_y],
-  [points[25][0] + 6, points[19][1] - close_y],
-  [points[25][0], 72],
-  [points[25][0] - 6, points[19][1] - close_y],
-  [points[31][0] - far_x + 3, points[31][1] - far_x],
+  [points[31][0] - 3.25, points[31][1] + 5],
+  [-76, 60],
+  [-66, 84.8],
+  [-34, 50],
+  [points[19][0] - 3.25, points[19][1] + 5.1],
 ];
 
 module magnet_profile_2d() {
