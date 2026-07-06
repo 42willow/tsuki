@@ -1,5 +1,5 @@
 assets/
 projects/
-hardware/cad/lib/
+hardware/cad/lib/BOSL2
 flake.lock
 LICENSE

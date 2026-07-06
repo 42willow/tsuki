@@ -1,4 +1,4 @@
-include <lib/BOSL2/std.scad>;
+include <./BOSL2/std.scad>;
 include <./vars.scad>;
 
 outline = right(
@@ -19,3 +19,5 @@ outlines = union(
   outline,
   xflip(outline)
 );
+
+polygon(points=outline);
