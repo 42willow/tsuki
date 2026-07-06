@@ -1,3 +1,3 @@
-[submodule "src/lib/BOSL2"]
-	path = src/lib/BOSL2
+[submodule "hardware/cad/lib/BOSL2"]
+	path = hardware/cad/lib/BOSL2
 	url = https://github.com/BelfrySCAD/BOSL2

@@ -1,6 +1,5 @@
 assets/
 projects/
-src/lib/
-src/keycaps/lame/
+hardware/cad/lib/
 flake.lock
 LICENSE
