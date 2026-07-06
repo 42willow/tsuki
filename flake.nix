@@ -43,6 +43,7 @@
         buildInputs = with pkgs; [
           ergogen
           openscad-unstable
+          svgo
         ];
       };
     });
