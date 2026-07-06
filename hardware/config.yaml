@@ -16,7 +16,8 @@ points:
       key:
         spread: 1cx
         padding: 1cy
-      anchor.shift: [1.5cx, cy/2]
+      anchor:
+        shift: [250, -100] # fix kicad placement
       columns:
         pinky:
         ring.key.stagger: 0.70cy
@@ -51,7 +52,7 @@ outlines:
       flip_horizontally: true
       paths: "M307.807 50.783a14.45 14.45 0 0 1 7.185 12.49c.008 20.172.008 72.483.008 103.224a87.1 87.1 0 0 1-11.824 43.817l-22.643 38.9a9.584 9.584 0 0 1-12.575 3.747c-14.382-7.052-45.857-21.505-75.958-28.96-61.034-15.116-150.01-16.861-179.274-17.009a9.715 9.715 0 0 1-9.719-9.713C3 168.69 3 85.413 3 61.495c0-4.226 1.729-8.268 4.786-11.186C22.213 37.22 68.518 1.002 140.578 1.002c72.906 0 144.741 37.072 167.229 49.783Z"
       scale: 0.36
-      origin: [-40, -202]
+      origin: [0, 0]
   switches:
     - what: rectangle
       where: [key]
@@ -75,3 +76,51 @@ outlines:
     - what: outline
       name: keycaps
       operation: stack
+pcbs:
+  tsuki:
+    template: kicad8
+    footprints:
+      keys:
+        what: ceoloide/switch_choc_v1_v2
+        where: [[
+            true,
+            -/^matrix_pinky_.*$/,
+            -/^mirror_matrix_inner_.*$/,
+            -/^mirror_thumb_.*$/,
+          ]]
+        adjust.rotate: 180
+        params: &choc_params
+          to: "{{column_net}}"
+          from: "{{colrow}}"
+          hotswap: true
+          choc_v1_support: false
+          choc_v2_support: false
+
+      keys_reversed:
+        what: ceoloide/switch_choc_v1_v2
+        where: [
+            /^matrix_pinky_.*$/,
+            /^mirror_matrix_inner_.*$/,
+            /^mirror_thumb_.*$/,
+          ]
+        adjust.rotate: 0
+        params: *choc_params
+
+      mcu:
+        what: ceoloide/mcu_supermini_nrf52840
+        where:
+          aggregate.parts:
+            - ref: matrix_inner_top
+            - ref: mirror_matrix_inner_top
+          shift: [122, -20]
+          # rotate: angle + 90
+      holeTopLeft:
+        what: ceoloide/mounting_hole_plated
+        where:
+          ref: [matrix_inner_top]
+          shift: [0.5kx, -0.3ky]
+      holeBottomLeft:
+        what: ceoloide/mounting_hole_plated
+        where:
+          ref: [matrix_inner_bottom]
+          shift: [0.5kx, -0.3ky]
