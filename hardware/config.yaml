@@ -9,6 +9,8 @@ units:
   ky: cy - .5
 
 points:
+  key.tags:
+    - key
   zones:
     matrix:
       key:
@@ -41,3 +43,35 @@ points:
   mirror:
     ref: matrix_pinky_bottom
     distance: -3cx
+
+outlines:
+  custom-svg:
+    # this is the outline for the plate
+    - what: svg
+      flip_horizontally: true
+      paths: "M307.807 50.783a14.45 14.45 0 0 1 7.185 12.49c.008 20.172.008 72.483.008 103.224a87.1 87.1 0 0 1-11.824 43.817l-22.643 38.9a9.584 9.584 0 0 1-12.575 3.747c-14.382-7.052-45.857-21.505-75.958-28.96-61.034-15.116-150.01-16.861-179.274-17.009a9.715 9.715 0 0 1-9.719-9.713C3 168.69 3 85.413 3 61.495c0-4.226 1.729-8.268 4.786-11.186C22.213 37.22 68.518 1.002 140.578 1.002c72.906 0 144.741 37.072 167.229 49.783Z"
+      scale: 0.36
+      origin: [-40, -202]
+  switches:
+    - what: rectangle
+      where: [key]
+      size: 14 + .2
+      fillet: 1
+  keycaps:
+    - what: rectangle
+      where: [key]
+      size: [cx, cy]
+      fillet: 1
+  plate:
+    - what: outline
+      name: custom-svg
+    - what: outline
+      name: switches
+      operation: stack
+  case_top:
+    - what: outline
+      name: custom-svg
+      expand: 4
+    - what: outline
+      name: keycaps
+      operation: stack
