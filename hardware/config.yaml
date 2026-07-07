@@ -2,12 +2,10 @@ meta:
   engine: 4.1.0
   name: tsuki
   author: 42willow
-
 units:
   # keycaps
   kx: cx - .5
   ky: cy - .5
-
 points:
   key.tags:
     - key
@@ -44,7 +42,6 @@ points:
   mirror:
     ref: matrix_pinky_bottom
     distance: -3cx
-
 outlines:
   custom-svg:
     # this is the outline for the plate
@@ -82,12 +79,7 @@ pcbs:
     footprints:
       keys:
         what: ceoloide/switch_choc_v1_v2
-        where: [[
-            true,
-            -/^matrix_pinky_.*$/,
-            -/^mirror_matrix_inner_.*$/,
-            -/^mirror_thumb_.*$/,
-          ]]
+        where: [[true, -/^matrix_pinky_.*$/, -/^mirror_matrix_inner_.*$/, -/^mirror_thumb_.*$/]]
         adjust.rotate: 180
         params: &choc_params
           to: "{{column_net}}"
@@ -95,17 +87,11 @@ pcbs:
           hotswap: true
           choc_v1_support: false
           choc_v2_support: false
-
       keys_reversed:
         what: ceoloide/switch_choc_v1_v2
-        where: [
-            /^matrix_pinky_.*$/,
-            /^mirror_matrix_inner_.*$/,
-            /^mirror_thumb_.*$/,
-          ]
+        where: [/^matrix_pinky_.*$/, /^mirror_matrix_inner_.*$/, /^mirror_thumb_.*$/]
         adjust.rotate: 0
         params: *choc_params
-
       mcu:
         what: ceoloide/mcu_supermini_nrf52840
         where:
