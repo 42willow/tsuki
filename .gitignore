@@ -2,3 +2,4 @@ result
 .direnv/
 dist/
 .DS_Store
+*.af~lock~
