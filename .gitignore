@@ -3,3 +3,4 @@ result
 dist/
 .DS_Store
 *.af~lock~
+*.kicad_prl
