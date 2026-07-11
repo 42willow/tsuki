@@ -19,13 +19,13 @@ stdenv.mkDerivation {
   installPhase = ''
     mkdir -p "$out" dist
 
-    ergogen src/ --debug --output dist
+    ergogen hardware/ --debug --output dist
 
     points=$(yq eval -o=json dist/points/points.yaml \
       | jq '[.[] | [.x, .y, .r]]')
     printf "points = %s;\n" "$points" > dist/points.scad
 
-    cp src/*.scad dist/
+    cp -r hardware/cad/* dist/
     mkdir -p dist/lib
     cp -r ${inputs.bosl2} dist/lib/BOSL2
 

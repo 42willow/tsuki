@@ -1,0 +1,119 @@
+meta:
+  engine: 4.1.0
+  name: tsuki
+  author: 42willow
+units:
+  # keycaps
+  kx: cx - .5
+  ky: cy - .5
+points:
+  key.tags:
+    - key
+  zones:
+    matrix:
+      key:
+        spread: 1cx
+        padding: 1cy
+      anchor:
+        shift: [150, -150] # fix kicad placement
+      columns:
+        pinky:
+        ring.key.stagger: 0.70cy
+        middle.key.stagger: 0.41cy
+        index.key.stagger: -0.32cy
+        inner.key.stagger: -0.15cy
+      rows:
+        bottom.padding: cy
+        home.padding: cy
+        top.padding: cy
+    thumb:
+      anchor:
+        ref: matrix_index_bottom
+        shift: [0.55cx, -1.18cy]
+        rotate: -15
+      columns:
+        tucky:
+          key.name: thumb_tucky
+        reachy:
+          key.spread: cx
+          key.splay: -15
+          key.origin: [-.5U, -0.5U]
+          key.name: thumb_reachy
+outlines:
+  plate_cutout:
+    - what: svg
+      flip_horizontally: false
+      paths: "M25.551,285.2C22.453,285.087 20,282.544 20,279.444C20,249.996 20,112.745 20,92.498C20,90.917 20.653,89.406 21.805,88.323C33.478,77.781 100.653,21.001 194,21C295.98,20.999 402.361,70.836 421.87,80.417C423.811,81.397 425.036,83.386 425.035,85.56C425.032,106.87 425.01,217.836 425.002,254.343C425.001,261.981 422.997,269.485 419.192,276.107C408.58,294.571 386.394,333.174 378.163,347.497C377.356,348.901 375.996,349.9 374.415,350.25C372.835,350.6 371.18,350.269 369.855,349.338C297.491,299.838 154.309,289.903 25.551,285.2Z"
+      scale: 0.264583
+      origin: [-515, 315]
+  pcb_cutout:
+    - what: svg
+      paths: "M25.551,285.2C22.453,285.087 20,282.544 20,279.444C20,249.983 20,112.618 20,92.47C20,90.905 20.64,89.409 21.771,88.327C33.347,77.7 100.566,19.954 194,21C270.986,21.862 343.955,48.769 353.86,52.558C354.548,52.829 355,53.493 355,54.232C355,62.171 355,106.285 355,122.24C355,123.768 355.607,125.233 356.687,126.313C357.767,127.393 359.232,128 360.76,128C375.555,128 414.35,128 423.19,128C423.67,128 424.13,128.191 424.47,128.53C424.809,128.87 425,129.33 425,129.81C425,142.932 425,223.799 425,254.339C425,261.979 422.996,269.486 419.189,276.111C408.577,294.577 386.393,333.175 378.163,347.497C377.356,348.901 375.996,349.9 374.415,350.25C372.835,350.6 371.18,350.269 369.855,349.338C297.491,299.838 154.309,289.903 25.551,285.2Z"
+      # scale: 0.264583
+      scale: 0.3
+      origin: [-515, 315]
+  # pcb_cutout:
+  #   - what: rectangle
+  #     where:
+  #       ref: matrix_middle_bottom
+  #       shift: [9, -1]
+  #     size: [110, 90]
+  #     fillet: 4
+  switches:
+    - what: rectangle
+      where: [key]
+      size: 14 + .2
+      fillet: 1
+  keycaps:
+    - what: rectangle
+      where: [key]
+      size: [cx, cy]
+      fillet: 1
+  plate:
+    - what: outline
+      name: plate_cutout
+    - what: outline
+      name: switches
+      operation: stack
+  case_top:
+    - what: outline
+      name: pcb_cutout
+      expand: 4
+    - what: outline
+      name: keycaps
+      operation: stack
+pcbs:
+  tsuki:
+    template: kicad8
+    # outlines:
+    #   board:
+    #     outline: pcb_cutout
+    footprints:
+      keys:
+        what: ceoloide/switch_choc_v1_v2
+        where: true
+        # adjust.rotate: 180
+        params: &choc_params
+          to: "{{column_net}}"
+          from: "{{colrow}}"
+          hotswap: true
+          choc_v1_support: false
+          choc_v2_support: true
+          reversible: true
+          include_keycap: true
+          keycap_height: 16.5
+          keycap_width: 17.5
+          include_stabilizer_pad: false
+      mcu:
+        what: ceoloide/mcu_supermini_nrf52840
+        params:
+          include_extra_pins: true
+        where:
+          ref: [matrix_inner_bottom]
+          shift: [cx + 3, 5]
+          # rotate: angle + 90
+      battery_connector:
+        what: ceoloide/battery_connector_jst_ph_2
+        where:
+          ref: [matrix_middle_bottom]
+          shift: [0, -cx]

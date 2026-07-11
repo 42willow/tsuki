@@ -1,4 +1,4 @@
-include <../dist/points.scad>;
+include <../../../dist/points.scad>;
 
 // tolerances and compensations calibrated for 0.4mm nozzle (FDM)
 
